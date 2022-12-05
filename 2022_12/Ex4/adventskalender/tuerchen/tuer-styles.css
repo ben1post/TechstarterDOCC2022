@@ -1,0 +1,131 @@
+@font-face {
+  font-family: 'Mountains of Christmas';
+  src: url('../fonts/MountainsofChristmas-Bold.woff2') format('woff2'),
+      url('../fonts/MountainsofChristmas-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+    padding: 0px;
+    background-color: #e2e2e2;
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+    font-size: 26px;
+    font-family: Mountains of Christmas;
+}
+
+
+#Alles {
+    font-size: 16px;
+    color: #C80000;
+    padding: 0px;
+    text-align: center;
+    width: 100%;
+    /* TESTEN */
+    border: 0px solid #FFFFFF;
+}
+
+.Titeltext {
+    font-size: calc(0.70rem + 1.5vw);
+    color: #009ad6;
+    padding: 0px;
+    margin: 35px 0px;
+    text-align: center;
+    width: 100%;
+}
+
+
+#Advent0 {
+  position: relative;
+  top: 0px;
+  left: 0;
+  margin: auto;
+  padding: 0;
+  width: 100%;
+  /* TESTEN */
+  border: 0px solid #FF007F;
+  height: auto;
+}
+
+#Advent1 {
+  z-index: 1;
+  position: relative;
+  top: 0px;
+  left: 0;
+  margin: auto;
+  padding: 0;
+  width: 100%;
+  /* max-width: 60%; */
+  max-width: 800px;
+  height: calc(vh * 66.66);
+  border: 0px solid #AF00FF;
+}
+
+
+#AdventGrafik {
+  z-index: 2;
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+}
+
+#AdventGrafik img {
+  border-radius:30px;
+}
+
+
+#Advent2 {
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0px solid #00BF00;
+}
+
+
+#Advent2 .AdventText {
+  padding: 30px 10px;
+  text-align: center;
+  margin: auto;
+  width: 80%;
+  color: #3F3F3F;
+  font-family: Arial, sans-serif;
+  font-size: calc(0.70rem + 1.5vw);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.button {
+  background-color: #009ad6;
+  border: none;
+  color: #2F2F2F;
+  padding: 12px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.button {
+  transition-duration: 0.6s;
+}
+
+.button:hover {
+  background-color: #FFFFFF;
+  color: #000ed6;
+}

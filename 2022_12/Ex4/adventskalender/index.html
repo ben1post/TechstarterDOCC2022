@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<title>Adventskalender 2022</title>
+<meta name="Keywords" content="Adventskalender Musik">
+<meta name="Description" content="Adventskalender der Musik">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="styles.css">
+
+
+<script>
+// Grundstruktur ist adaptiert von web-toolbox.net
+
+var Kalnow = new Date();
+var Kalyear = Kalnow.getFullYear();
+
+// aktuelles Datum
+function Datum() {
+
+var TageLang = new Array ("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+var MonateLang = new Array ("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+var date = ((Kalnow.getDate()<10) ? "0" : "")+ Kalnow.getDate();
+heute = TageLang[Kalnow.getDay()]+ " "  + date + ". " + MonateLang[Kalnow.getMonth()] + " " + Kalyear ;
+document.write("" +heute);
+document.write("&#160;&#160;-&nbsp;&nbsp;");
+}
+
+
+function Warten01() {
+
+var KalZiel = new Date("December 25, " + Kalyear);
+var diff = KalZiel.getTime() - Kalnow.getTime();
+var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+if (days > 1)
+document.write(" Still " + (days+1) + " days until Christmas");
+else if (days == 1)
+document.write("Christmas will be tomorrow!");
+else if (days == 0)
+document.write("Christmas is today!");
+else if (days == -1)
+document.write("MHappy Holidays");
+else if (days == -2)
+document.write("Happy Holidays");
+else if (days < -2)
+document.write(" Christmas time is over :( ");
+return
+}
+
+
+function Warten02() {
+var KalStart = new Date("December 1, " + Kalyear);
+var diff = KalStart.getTime() - Kalnow.getTime();
+var Tage = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+var monat = Kalnow.getMonth() + 1;
+if (monat != 12) {
+  document.write("You still have to wait a little bit! <br>");
+  if (Tage >= 1)
+  document.write("Still " + (Tage+1) + " days until the first door can be opened.");
+  else
+  document.write("The first door can be openend tomorrow!!");
+  }
+
+if (monat == 12 && Tage <= -1 && Tage >= -24){
+document.write('You can open the door of the day!');
+}
+if (monat == 12 && Tage <= -24){
+document.write('All doors can be opened now.');
+}
+return
+}
+
+
+
+
+// PopUp-Window Eigenschaften
+Attribute02 = "left=40,top=40,screenX=40,screenY=40,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=700,height=600";
+
+
+
+pfad = "tuerchen/";
+
+var KlickDatum = new Date();
+var KlickMonat = KlickDatum.getMonth();
+var KlickTag = KlickDatum.getDate();
+
+
+// KlickMonat = 11;
+// KlickTag = 15;
+
+function zeigeDatei(KlickZahl) {
+
+// zu früh Feb - Nov
+console.log(KlickMonat)
+if(KlickMonat > 0 && KlickMonat < 11) {
+Datei = pfad + "0.html";
+window.open(Datei,'_self');
+return;
+}
+
+// zu früh im Dezember
+else if(KlickZahl > KlickTag && KlickMonat == 11) {
+Datei = pfad + "00.html";
+window.open(Datei,'_self');
+return;
+}
+
+// Tagesdatei anzeigen
+else {
+var Datei = pfad + KlickZahl + ".html";
+window.open(Datei,'_self');
+}
+
+}
+
+//  End -->
+</script>
+
+
+
+
+</head>
+
+<body>
+
+<div id="Alles">
+
+<div class="Titeltext">ADVENTCALENDAR</div>
+<div class="Titeltext">
+  -  
+  <script>
+    Datum()
+  </script>
+</div>
+<div>
+  <button class="button" type="button" onclick="sortTable()">
+    shuffle</button>
+  </div>
+
+<div id="Advent0">
+<div id="Advent1">
+
+
+<!-- Kalendergrafik -->
+
+<div id="AdventGrafik"><img src="block-120x80-transparent.png" width="100%" alt=""></div>
+
+<!-- Anfang Kalender   -->
+<script>
+function sortTable() {
+  //get the parent table for convenience
+  let table = document.getElementById("Tabelle2");
+
+  //1. get all rows
+  let rowsCollection = table.querySelectorAll("tr");
+
+  //2. convert to array
+  let rows = Array.from(rowsCollection)
+    //.slice(1); //skip the header row
+
+  //3. shuffle
+  shuffleArray(rows);
+
+  //4. add back to the DOM
+  for (const row of rows) {
+    table.appendChild(row);
+  }
+}
+
+
+/**
+ * Randomize array element order in-place.
+ * Using Durstenfeld shuffle algorithm.
+ * from: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array/12646864#12646864
+ */
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+}
+
+</script>
+
+<table id="Tabelle2" cellpadding="0" cellspacing="0">
+<tr>
+<td><div class="tabcontent"><a href="javascript:zeigeDatei(23);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+  <span class="tabelletext">23</span></div></td>
+<td><div class="tabcontent"><a href="javascript:zeigeDatei(14);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+  <span class="tabelletext">14</span></div></td>
+<td><div class="tabcontent"><a href="javascript:zeigeDatei(16);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+  <span class="tabelletext">16</span></div></td>
+<td><div class="tabcontent"><a href="javascript:zeigeDatei(21);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+  <span class="tabelletext">21</span></div></td>
+<td><div class="tabcontent"><a href="javascript:zeigeDatei(5);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+  <span class="tabelletext">5</span></div></td>
+<td><div class="tabcontent"><a href="javascript:zeigeDatei(12);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+  <span class="tabelletext">12</span></div></td>
+</tr>
+
+<tr>
+  <td><div class="tabcontent"><a href="javascript:zeigeDatei(20);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+    <span class="tabelletext">20</span></div></td>
+  <td><div class="tabcontent"><a href="javascript:zeigeDatei(13);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+    <span class="tabelletext">13</span></div></td>
+  <td><div class="tabcontent"><a href="javascript:zeigeDatei(1);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+    <span class="tabelletext">1</span></div></td>
+  <td><div class="tabcontent"><a href="javascript:zeigeDatei(24);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+    <span class="tabelletext">24</span></div></td>
+  <td><div class="tabcontent"><a href="javascript:zeigeDatei(2);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+    <span class="tabelletext">2</span></div></td>
+  <td><div class="tabcontent"><a href="javascript:zeigeDatei(11);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+    <span class="tabelletext">11</span></div></td>
+</tr>
+
+<tr>
+  <td><div class="tabcontent"><a href="javascript:zeigeDatei(15);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+    <span class="tabelletext">15</span></div></td>
+  <td><div class="tabcontent"><a href="javascript:zeigeDatei(17);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+    <span class="tabelletext">17</span></div></td>
+  <td><div class="tabcontent"><a href="javascript:zeigeDatei(3);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+    <span class="tabelletext">3</span></div></td>
+  <td><div class="tabcontent"><a href="javascript:zeigeDatei(6);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+    <span class="tabelletext">6</span></div></td>
+  <td><div class="tabcontent"><a href="javascript:zeigeDatei(22);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+    <span class="tabelletext">22</span></div></td>
+  <td><div class="tabcontent"><a href="javascript:zeigeDatei(7);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+    <span class="tabelletext">7</span></div></td>
+</tr>
+
+<tr>
+  <td><div class="tabcontent"><a href="javascript:zeigeDatei(19);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+    <span class="tabelletext">19</span></div></td>
+  <td><div class="tabcontent"><a href="javascript:zeigeDatei(9);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+    <span class="tabelletext">9</span></div></td>
+  <td><div class="tabcontent"><a href="javascript:zeigeDatei(8);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+    <span class="tabelletext">8</span></div></td>
+  <td><div class="tabcontent"><a href="javascript:zeigeDatei(18);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+    <span class="tabelletext">18</span></div></td>
+  <td><div class="tabcontent"><a href="javascript:zeigeDatei(4);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+    <span class="tabelletext">4</span></div></td>
+  <td><div class="tabcontent"><a href="javascript:zeigeDatei(10);"><img src="gold/flake.png" alt="" border="0" width="100%" height="100%"></a>
+    <span class="tabelletext">10</span></div></td>
+
+</tr>
+</table>
+
+<!-- Ende Kalender -->
+</div>
+</div>
+
+
+<p class="Fusstext">
+
+<script>
+
+Warten02()
+document.write('<br>');
+Warten01()
+
+</script>
+
+</p>
+
+</div>
+
+</body>
+</html>
