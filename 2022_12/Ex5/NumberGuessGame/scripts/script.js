@@ -1,16 +1,21 @@
 // Number Guess Game JS !WIP!
-var GameStarted = false
+var GameStarted = false;
+var RandomNumber = -1
 
 function startGame() {
   'use strict'
-
-if (GameStarted){
-  document.getElementById("higherLower").innerHTML = "Finish this game first!";
-} else {
-  document.getElementById("higherLower").innerHTML = "You have started a new game!";
-}
-
-  GameStarted = true
+  // Checks if game has been started, if not, intialize game
+  if (GameStarted){
+    document.getElementById("higherLower").innerHTML = "Finish this game first!";
+  } else {
+    document.getElementById("higherLower").innerHTML = "You have started a new game!";
+    document.getElementById("StartButton").classList.toggle('btn-success');
+    // Generate random number between 0 and 100
+    RandomNumber = Math.floor(Math.random() * 101);
+    console.log(RandomNumber);
+    
+    GameStarted = true;
+  }
 }
 
 function submitNumber() {
@@ -18,46 +23,31 @@ function submitNumber() {
 
   if (!GameStarted){
       document.getElementById("higherLower").innerHTML = "You have to start the game first!";
-      throw "exit";
+
   } else {
     document.getElementById("higherLower").innerHTML = " ";
   }
-  
-  let numberr = document.querySelector('input');
 
-  console.log(numberr.value);
-  console.log(numberr)
-  function numberCheckValidity(e){
-    if (numberr.value > 50) {
-      console.log("SHITT");
-      numberr.setCustomValidity("OH NO");
-    }
-  }
-
-  numberr.addEventListener('submit', function (event){
-    console.log(event)
-    if (!numberCheckValidity(event)) {
-
-      event.preventDefault()
-      event.stopPropagation()
-    }
-
-    numberr.classList.add('was-validated')
+  // Fetch the single number input, and validate input:
+  var forms = document.querySelectorAll('.needs-validation')
+  console.log(forms)
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        form.classList.add('was-validated')
+      }, false)
   })
 
+  // actually get the submitted value:
+  let numberSubmitted = document.querySelector('input').value;
 
-  // // Loop over them and prevent submission
-  // Array.prototype.slice.call(SubmittedNumbers)
-  //   .forEach(function (SubmittedNumbers) {
-  //     SubmittedNumbers.addEventListener('submit', function (event) {
-  //       if (!numberCheckValidity(event)) {
-  //         event.preventDefault()
-  //         event.stopPropagation()
-  //       }
+  console.log(numberSubmitted);
 
-  //       SubmittedNumbers.classList.add('was-validated')
-  //     }, false)
-  //   })
 
   
 }

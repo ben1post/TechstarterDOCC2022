@@ -27,7 +27,7 @@
     <div class="container">
         <div class="row g-3">
             <div class="col-md-4">
-                <button class="btn btn-primary" type="submit" onclick="startGame()">Start Game</button>
+                <button id="StartButton" class="btn btn-primary" type="submit" onclick="startGame()">Start Game</button>
             </div>
             <div class="col-md-4">
                 <!-- Button trigger modal -->
@@ -62,7 +62,7 @@
         <form class="row g-3 needs-validation" novalidate>
             <div class="col-md-4 mt-4">
               <label for="enterNumberBTN" class="form-label">Let's Play!</label>
-              <input type="text" class="form-control" id="enterNumberBTN" placeholder="Number" required>
+              <input  type="number" min="0" max="100" class="form-control" id="enterNumberBTN" placeholder="Number" required>
               <div class="valid-feedback">
                 Looks good!
               </div>
@@ -90,3 +90,4 @@
 
 </body>
 </html>
+
