@@ -59,10 +59,10 @@
 
 <!-- Number Guessing Form -->
 <div class="container mt-4">
-        <form class="row g-3 needs-validation" novalidate>
+        <div class="row g-3 needs-validation" novalidate>
             <div class="col-md-4 mt-4">
               <label for="enterNumberBTN" class="form-label">Let's Play!</label>
-              <input  type="number" min="0" max="100" class="form-control" id="enterNumberBTN" placeholder="Number" required>
+              <input onchange="editForm()" type="number" min="0" max="100" class="form-control" id="enterNumberBTN" placeholder="Number" required>
               <div class="valid-feedback">
                 Looks good!
               </div>
@@ -71,7 +71,7 @@
               </div>
 
               <div class="col-12 mt-4">
-                <button class="btn btn-primary" type="submit" id="number" onclick="submitNumber()">Submit number</button>
+                <button class="btn btn-primary" id="numberButton" onclick="submitNumber()">Submit number</button>
               </div>
 
               <div class="col-12 mt-4" id="higherLower">
@@ -81,11 +81,11 @@
 
             <!-- previous entries list -->
             <div class="col-md-4 mt-4 ">
-                <label for="previousEntriesTextArea" class="form-label">Previous entries</label>
-                <textarea readonly class="form-control rounded-0" id="previousEntriesTextArea" rows="10"></textarea>
+                <label for="previousEntries" class="form-label">Previous entries</label>
+                <textarea readonly class="form-control rounded-0" id="previousEntries" rows="10"></textarea>
               </div>
 
-          </form>
+            </div>
 </div>
 
 </body>
