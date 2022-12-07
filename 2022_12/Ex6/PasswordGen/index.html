@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PasswordGen</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- basierend auf https://webdesign.tutsplus.com/tutorials/build-a-configurable-random-password-generator-with-javascript--cms-93262 -->
+    <div class="container">
+        <h2>Password Generator</h2>
+        <div class="result-container">
+        <input type="text" id="result" />
+        <button class="copy-result" id="copy">Copy</button>
+        </div>
+        <div class="settings">
+        <div class="input-group">
+            <label>Password length (4-40)</label>
+            <input type="range" id="length" min="4" max="40" step="1" />
+            <span id="length-result">10</span>
+        </div>
+        <div class="input-group">
+            <label>Include numbers</label>
+            <input type="checkbox" id="numbers" checked />
+        </div>
+        <div class="input-group">
+            <label>Include symbols</label>
+            <input type="checkbox" id="symbols" checked />
+        </div>
+        </div>
+        <button class="generate-btn" id="generate">Generate</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
