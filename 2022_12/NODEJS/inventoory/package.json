@@ -1,0 +1,20 @@
+{
+  "type": "module",
+  "name": "inventoory",
+  "version": "1.0.0",
+  "description": "Verwaltung von großen und kleinen Dingen",
+  "main": "inventoory.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon inventoory.js"
+  },
+  "author": "Manuel Fischer",
+  "license": "MIT",
+  "dependencies": {
+    "sqlite3": "^5.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+
+}
