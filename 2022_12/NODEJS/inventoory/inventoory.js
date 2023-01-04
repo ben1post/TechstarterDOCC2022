@@ -10,7 +10,8 @@ const port = '3000'
 //Ein Server erstellen ...
 let server = http.createServer(OnUserRequest);
 // ... und auf Port 3000 auf anfragen warten
-server.listen(port,hostname, () => {console.log(`Server is Listening on ${hostname}:${port}`)})
+server.listen(port,hostname, () => {
+  console.log(`Server is Listening on ${hostname}:${port}`)})
 
 // create SQLITE DB
 let db = new sqlite3.Database('./db/sample.db', (err) => {
@@ -21,19 +22,13 @@ let db = new sqlite3.Database('./db/sample.db', (err) => {
   });
 
 // CREATE SQLITE TABLE
-db.run('CREATE TABLE IF NOT EXISTS inventory(id NUMERICAL ID name TEXT, typ TEXT)');
+db.run('CREATE TABLE IF NOT EXISTS \
+  inventory(id INTEGER PRIMARY KEY, name TEXT, typ TEXT, Neupreis TEXT, Ort TEXT)');
 
 
 // TRY EDITING SQLITE DB:
 console.log("try inputting a value:")
-db.run("INSERT or REPLACE INTO inventory (name, typ) VALUES ('hello', 'bar')");
-
-db.all("SELECT * FROM inventory", function(err, rows) {
-    rows.forEach(function (row) {
-      console.log(row.name + ": " + row.typ );
-    });
-   });
-
+// db.run("INSERT or REPLACE INTO inventory (name, typ) VALUES ('hello', 'bar')");
 
 ////////////////////////////////////////////////////////////////////////////////////
 //(Beispiel-)Daten aus JSON-Datei laden
@@ -47,14 +42,24 @@ console.log("ITEMS")
 // for (let i=0; i<10; i++) {
 //     console.log(JSON.stringify(items[i]))
 // }
-let myObj = {
-    paramOne: "First value",
-    paramTwo: "Second value",
-};
-let sqlQuery = 'INSERT INTO inventory VALUES(:paramOne, :paramTwo);';
+// let myObj = {
+//     name: "Auto",
+//     typ: "Fahrzeug",
+//     Neupreis : "3000",
+//     Ort: "Garage",
+// };
+// let sqlQuery = 'INSERT INTO inventory VALUES(NULL, :name, :typ, :Neupreis, :Ort);';
 
 // Run command and variable will be replaces
-db.run(sqlQuery, [myObj.paramOne, myObj.paramTwo])
+//db.run(sqlQuery, [myObj.name, myObj.typ, myObj.Neupreis, myObj.Ort])
+
+let sqlQuery = 'INSERT INTO inventory VALUES(NULL, :name, :typ, :Neupreis, :Ort);';
+
+for (var i=0; i<items.length; i++) {
+  let item = items[i];
+  console.log(item)
+  db.run(sqlQuery, [item.name, item.typ, item.Neupreis, item.Ort])
+}
 
 // db.run("INSERT or REPLACE INTO inventory (name, typ) VALUES (?, 'bar')");
 
@@ -114,6 +119,13 @@ function OnUserRequest(req, res){
     counter++
 }
 
+
+// print all data contained in SQLITE table
+db.all("SELECT * FROM inventory", function(err, rows) {
+  rows.forEach(function (row) {
+    console.log(row.id + ": " + row.name + " - " + row.typ + " - " + row.Neupreis);
+  });
+ });
 
 // close SQLITE DB:
 db.close((err) => {
