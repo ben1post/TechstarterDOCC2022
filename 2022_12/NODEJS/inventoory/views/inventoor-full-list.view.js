@@ -91,7 +91,13 @@ return html;
 
 };
 
+
+
 function createHTMLTable(items){
+    // ITEMS IS NOW A SQLITE DATABASE
+    console.log("RUNNING THIS HTML TABLE FUNC")
+
+
     let headerNames = Object.keys(items[0])
     let htmlHeader=""
     //Als erstes die Überschriften aus dem Objekt laden
