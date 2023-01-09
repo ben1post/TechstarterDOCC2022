@@ -1,3 +1,5 @@
+"use strict;"
+
 import http from 'http'
 import fs from 'fs'
 import url from 'url'
@@ -15,14 +17,14 @@ server.listen(port,hostname, () => {
 
 // create SQLITE DB
 // './db/sample.db'
-let db = new sqlite3.Database(':memory:', (err) => {
+let db = new sqlite3.Database('./db/sample.db', (err) => {
     if (err) {
       return console.error(err.message);
     }
     console.log('Connected to the sample SQlite database.');
   });
 
-db.run('CREATE TABLE hello (name TEXT)')
+// db.run('CREATE TABLE hello (name TEXT)')
 
 // CREATE SQLITE TABLE
 db.run('CREATE TABLE IF NOT EXISTS \
@@ -33,30 +35,44 @@ db.run('CREATE TABLE IF NOT EXISTS \
 let rawData = fs.readFileSync('./data/items.json')
 let items = JSON.parse(rawData)
 
-// INSTERT DEFAULT VALUES INTO DATABASE
+// // INSTERT DEFAULT VALUES INTO DATABASE
 let sqlQuery = 'INSERT INTO inventory VALUES(NULL, :name, :typ, :Neupreis, :Ort);';
 
 for (var i=0; i<items.length; i++) {
+  console.log(i);
   let item = items[i];
   db.run(sqlQuery, [item.name, item.typ, item.Neupreis, item.Ort])
 }
 
-
 console.log("AFTERWARDS")
 
+function getRowByID(id_val){
+  let sqlQuery_getbyID = "SELECT * FROM inventory WHERE id = ?"
+
+  db.serialize(() => {
+      db.get(sqlQuery_getbyID, id_val, (err, row) => {
+        if (err) {
+          console.error(err.message);
+        }
+        return(row);
+      });
+    });
+}
 
 
 let counter=0;
 function OnUserRequest(req, res){
 
     console.log(counter)
+    // console.log("REQ")
+    // console.log(req)
 
     let parsedURL = url.parse(req.url, true)
 
     if(req.url === "/"){ //Das ist die Startseite
         //res.setHeader ('Content-Type', 'text/html');
         res.statusCode = 200;
-        res.end (httmldoc(items))
+        res.end (httmldoc(db))
     } else if (req.url === "/ueber"){
         res.setHeader ('Content-Type', 'text/html');
         res.statusCode = 200;
@@ -68,8 +84,8 @@ function OnUserRequest(req, res){
         if(splitedURL.includes("delete") && splitedURL.length == 3){
             //delete items[0]
             let item_to_delete = splitedURL[2]
-            items.splice(item_to_delete,1)
-            res.end (httmldoc(items))
+            //items.splice(item_to_delete,1)
+            res.end (httmldoc(db))
 
         }
         else{
