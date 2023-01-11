@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1 = title
+  p Welcome to Benny's #{title} App
+
+  p #{moment(Date.now()).format('DD/MM/YYYY')}
+
+  p #{moment(Date.now()).format('HH:MM')}
