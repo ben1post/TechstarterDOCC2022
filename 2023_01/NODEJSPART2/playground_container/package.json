@@ -1,0 +1,20 @@
+{
+  "type": "module",
+  "name": "sqlite-test",
+  "version": "1.0.0",
+  "description": "SQLITE ausprobieren, mehr nicht",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon main.js"
+  },
+  "author": "Peter Parker",
+  "license": "MIT",
+  "dependencies": {
+    "sqlite3": "^5.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+
+}
