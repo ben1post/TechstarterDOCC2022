@@ -3,8 +3,8 @@
     "tasks": [
         {
             "label": "Compile",
-            "type":"npm",
-            "script": "npx tsc",
+            "type":"shell",
+            "command": "npx tsc",
             "problemMatcher": []
         }
     ]
