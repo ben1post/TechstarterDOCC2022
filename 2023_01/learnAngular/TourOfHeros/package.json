@@ -1,5 +1,5 @@
 {
-    "name": "NODEJSDockerTutorial",
+    "name": "TourOfHeros",
     "description": "Docker Container mit Node JS",
     "version": "0.0.1",
     "scripts": {
